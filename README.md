@@ -85,5 +85,5 @@ We used little but also some extras to have fun:
 - [Spark](https://github.com/perwendel/spark) - a tiny web framework.
 - [Unirest](https://github.com/Kong/unirest-java) - a lightweight HTTP client library (for testing).
 - [Dotenv](https://github.com/cdimascio/dotenv-java) - a module that loads environment variables from a .env file.
-- [JUnit5](https://github.com/junit-team/junit5)
+- [JUnit5](https://github.com/junit-team/junit5).
 
