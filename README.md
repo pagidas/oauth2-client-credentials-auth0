@@ -1,4 +1,4 @@
-# Oauth2 -- Client Credentials flow (grant)
+# OAuth2 -- client credentials flow (grant)
 
 This is a demo on how to secure an HTTP API, that its client is an
 application and not a user. It is also known as machine-to-machine
