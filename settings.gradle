@@ -1,0 +1,9 @@
+rootProject.name = 'oauth2-client-credentials-flow-auth0'
+include 'auth',
+        'auth:api-authorization',
+        'auth:api-authorization:domain',
+        'auth:api-authorization:jwt-adapter',
+        'auth:api-authorization:jwt-http-adapter',
+        'auth:api-authorization:main',
+        'main'
+

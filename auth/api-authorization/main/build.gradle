@@ -1,0 +1,11 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api(project(":auth:api-authorization:domain"))
+    implementation(project(":auth:api-authorization:jwt-adapter"))
+    implementation(project(":auth:api-authorization:jwt-http-adapter"))
+    implementation 'com.sparkjava:spark-core:2.9.3'
+}
+

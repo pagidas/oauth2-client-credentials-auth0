@@ -1,0 +1,11 @@
+dependencies {
+    implementation(project(":auth:api-authorization:domain"))
+    implementation(project(":auth:api-authorization:jwt-adapter"))
+    implementation 'com.sparkjava:spark-core:2.9.3'
+
+    testImplementation(testFixtures(project(":auth:api-authorization:domain")))
+    testImplementation(testFixtures(project(":auth:api-authorization:jwt-adapter")))
+    testImplementation 'com.konghq:unirest-java:3.11.09'
+    testImplementation 'io.vavr:vavr:1.0.0-alpha-4'
+}
+

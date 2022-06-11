@@ -1,0 +1,9 @@
+dependencies {
+    implementation(project(':auth:api-authorization:main'))
+    implementation 'com.sparkjava:spark-core:2.9.3'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.4'
+
+    testImplementation 'com.konghq:unirest-java:3.11.09'
+    implementation 'com.auth0:java-jwt:4.0.0-beta.0'
+}
+

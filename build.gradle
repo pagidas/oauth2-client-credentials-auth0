@@ -1,0 +1,38 @@
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-test-fixtures'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+        testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.1")
+
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+        testFixturesImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
+    }
+
+    sourceCompatibility = JavaVersion.VERSION_17
+
+    var ENABLE_PREVIEW = '--enable-preview'
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs.add(ENABLE_PREVIEW)
+        options.compilerArgs.add("-Xlint:preview")
+        options.release.set(17)
+    }
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+        jvmArgs([ENABLE_PREVIEW])
+    }
+    tasks.withType(JavaExec).configureEach() {
+        jvmArgs([ENABLE_PREVIEW])
+    }
+}
+
