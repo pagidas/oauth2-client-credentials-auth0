@@ -1,5 +1,6 @@
 package org.example.auth.api_authorization.http;
 
+import kong.unirest.Unirest;
 import org.example.auth.api_authorization.domain.AuthApi;
 import org.example.auth.api_authorization.domain.AuthApi.Tokens;
 import org.example.auth.api_authorization.jwt.JwtAuthAdapter.SigningSecret;
@@ -10,11 +11,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import spark.Service;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.stream.Stream;
 
 import static org.eclipse.jetty.http.HttpHeader.AUTHORIZATION;
@@ -29,7 +25,6 @@ import static spark.Service.ignite;
 public class BearerAuthFilterInvalidSchemeTest {
 
     public static final Service httpApp;
-    public static final HttpClient http = HttpClient.newHttpClient();
 
     static {
         var requiresScope = requiresScopeLogic.apply(
@@ -62,16 +57,12 @@ public class BearerAuthFilterInvalidSchemeTest {
 
     @ParameterizedTest()
     @MethodSource("provideInvalidBearerAuthHeader")
-    void unauthorisedWhenInvalidBearerScheme(String headerValue) throws IOException, InterruptedException {
-        var response = http.send(
-                HttpRequest.newBuilder(URI.create("http://localhost:8080/api/protected"))
-                        .GET()
-                        .header(AUTHORIZATION.asString(), headerValue)
-                        .build(),
-                BodyHandlers.ofString()
-        );
+    void unauthorisedWhenInvalidBearerScheme(String headerValue) {
+        var response = Unirest.get("http://localhost:8080/api/protected")
+                .header(AUTHORIZATION.asString(), headerValue)
+                .asEmpty();
 
-        assertEquals(401, response.statusCode());
+        assertEquals(401, response.getStatus());
     }
 
     private static Stream<Arguments> provideInvalidBearerAuthHeader() {
